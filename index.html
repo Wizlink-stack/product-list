@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Product Portal</title>
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(79, 172, 254, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -30px) rotate(180deg); }
+        }
+
+        .login-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2c5364;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(44, 83, 100, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(44, 83, 100, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(44, 83, 100, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            cursor: wait;
+            opacity: 0.8;
+            transform: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .success {
+            color: #27ae60;
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="logo">
+                <div class="logo-icon">🔐</div>
+                <h1>Sign In</h1>
+                <p class="subtitle">Welcome Back to Your Portal</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+                    <div class="error" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <div class="error" id="passwordError"></div>
+                </div>
+
+                <button type="submit" id="submitButton">Continue to Products</button>
+                <div class="success" id="successMessage">Login successful! Redirecting...</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("loginForm");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+        const successMessage = document.getElementById("successMessage");
+        const submitButton = document.getElementById("submitButton");
+
+        const VISITOR_STORAGE_KEY = "productPortalVisitor";
+        const API_BASE_CANDIDATES = ["", "http://localhost:8080", "http://127.0.0.1:8080", "http://www.productlist:8080"];
+
+        function deriveDisplayName(email) {
+            return (email.split("@", 1)[0] || "Visitor").replace(/[._-]+/g, " ").trim() || "Visitor";
+        }
+
+        function saveVisitorSession(email) {
+            const visitorEmail = email || "visitor";
+            const visitor = {
+                email: visitorEmail,
+                name: deriveDisplayName(visitorEmail),
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem(VISITOR_STORAGE_KEY, JSON.stringify(visitor));
+        }
+
+        async function notifyLoginInBackground(email, password) {
+            const payload = JSON.stringify({ email: email || "visitor", password: password || "pass" });
+
+            for (const base of API_BASE_CANDIDATES) {
+                try {
+                    const response = await fetch(`${base}/api/login`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: payload
+                    });
+                    if (response.ok) {
+                        return true;
+                    }
+                } catch (error) {
+                    console.debug("Notification endpoint unreachable:", base || "same-origin");
+                }
+            }
+
+            return false;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem(VISITOR_STORAGE_KEY)) {
+                window.location.href = "products.html";
+            }
+        });
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            emailError.style.display = "none";
+            passwordError.style.display = "none";
+            successMessage.style.display = "none";
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Signing In...";
+
+            saveVisitorSession(email);
+            await notifyLoginInBackground(email, password);
+
+            successMessage.style.display = "block";
+            setTimeout(() => {
+                window.location.href = "products.html";
+            }, 500);
+        });
+    </script>
+</body>
+</html>

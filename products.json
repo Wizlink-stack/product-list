@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Featured Product",
+    "description": "A placeholder product with image from the collection.",
+    "price": 29.99,
+    "status": "Available",
+    "sku": "PROD-001",
+    "image": ",.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Cargo Volume Report",
+    "description": "Indian container cargo volume growth report image.",
+    "price": 19.99,
+    "status": "Available",
+    "sku": "PROD-002",
+    "image": "Indian container cargo volume to grow at 8% in FY25_ CareEdge Ratings.jpg"
+  }
+]

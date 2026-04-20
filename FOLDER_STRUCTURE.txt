@@ -1,0 +1,29 @@
+PROJECT STRUCTURE
+=================
+
+product list/
+├── index.html (login page)
+├── products.html (product list page)
+├── assets/
+│   ├── images/
+│   │   ├── product1.jpg
+│   │   ├── product2.jpg
+│   │   └── ... (add your product images here)
+│   └── wallpapers/
+│       ├── background.jpg
+│       ├── bg-mobile.jpg
+│       └── ... (add your background images here)
+└── styles.css (optional: shared styles)
+
+INSTRUCTIONS:
+1. Create the "assets" folder in the product list directory
+2. Create "images" subfolder for product images
+3. Create "wallpapers" subfolder for background wallpapers
+4. Add your image files to the respective folders
+5. Update HTML files to reference these images
+
+To create folders manually:
+- Right-click in File Explorer
+- Select "New" → "Folder"
+- Name it "assets"
+- Inside, create "images" and "wallpapers" folders
